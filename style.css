@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:wght@400;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    box-sizing: border-box;
+    background-color: #000000;
+    color: #F6F6F6;
+}
+
+.titulo-destaque{
+    color: #22D4FD;
+}
+
+.apresentacao{
+    margin: 10% 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.apresentacao__conteudo{
+    width: 615px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.apresentacao__conteudo__titulo{
+    font-size: 36px;
+    font-family: 'Krona One', sans-serif;
+}
+
+.apresentacao__conteudo__texto{
+    font-size: 24px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.apresentacao__links{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+
+.apresentacao__links__link{
+    background-color: #22D4FD;
+    width: 280px;
+    text-align: center;
+    border-radius: 16px;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 21.5px 0;
+    text-decoration: none;
+    color: #000000;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.apresentacao__imagem {
+  position: relative;
+  flex: 1 1 300px;
+  max-width: 400px;
+  width: 100%;
+}
+
+/* QUADRADO ATRÁS (borda azul, fundo preto) */
+.apresentacao__imagem::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 100%;
+  height: 100%;
+  border: 3px solid #22d4fd;
+  background-color: #000;
+  border-radius: 12px;
+  z-index: 1;
+}
+
+/* IMAGEM EM CIMA DO QUADRADO, ligeiramente desproporcional */
+.apresentacao__imagem img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: 2px solid #22d4fd;
+  border-radius: 10px;
+  position: relative;
+  z-index: 2;
+  transform: translate(-5px, -5px); /* menos deslocamento, reduz scroll */
+  max-width: 100%;
+}
