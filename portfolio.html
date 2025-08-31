@@ -1,0 +1,712 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Nome - Desenvolvedora Backend</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            /* 🎨 CORES DO FUNDO ANIMADO - Preto e azul água React oficial: */
+            background: linear-gradient(-45deg, #000000, #1a1a1a, #282c34, #61dbfb);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header e Navegação */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            /* 🎨 COR DO HOVER DA NAVEGAÇÃO - Azul água React: */
+            color: #61dafb;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            /* 🎨 CORES DO TÍTULO PRINCIPAL - Branco e azul água React oficial: */
+            background: linear-gradient(45deg, #fff, #61dbfb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 🎨 SHIMMER NAS BORDAS: */
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50px;
+            padding: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                transparent 30%,
+                #61dbfb 50%,
+                transparent 70%,
+                transparent 100%
+            );
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: exclude;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            animation: shimmerBorder 2s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes shimmerBorder {
+            0% {
+                background: linear-gradient(
+                    90deg,
+                    #61dbfb 0%,
+                    transparent 30%,
+                    transparent 70%,
+                    transparent 100%
+                );
+            }
+            25% {
+                background: linear-gradient(
+                    180deg,
+                    #61dbfb 0%,
+                    transparent 30%,
+                    transparent 70%,
+                    transparent 100%
+                );
+            }
+            50% {
+                background: linear-gradient(
+                    270deg,
+                    #61dbfb 0%,
+                    transparent 30%,
+                    transparent 70%,
+                    transparent 100%
+                );
+            }
+            75% {
+                background: linear-gradient(
+                    360deg,
+                    #61dbfb 0%,
+                    transparent 30%,
+                    transparent 70%,
+                    transparent 100%
+                );
+            }
+            100% {
+                background: linear-gradient(
+                    90deg,
+                    #61dbfb 0%,
+                    transparent 30%,
+                    transparent 70%,
+                    transparent 100%
+                );
+            }
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Seções */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            /* 🎨 CORES DA LINHA DECORATIVA DOS TÍTULOS - Azul água React: */
+            background: linear-gradient(45deg, #61dafb, #21d4fd);
+            border-radius: 2px;
+        }
+
+        /* Sobre */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto;
+            /* 🎨 BORDA AZUL REACT: */
+            border: 3px solid #61dbfb;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            /* 🎨 BORDA AZUL REACT: */
+            border: 2px solid #61dbfb;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        /* Projetos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            /* 🎨 BORDA AZUL REACT MAIS VISÍVEL: */
+            border: 3px solid #61dbfb;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-image {
+            height: 200px;
+            /* 🎨 CORES DE FUNDO DOS CARDS DE PROJETO - Preto e cinza escuro React: */
+            background: linear-gradient(45deg, #000000, #20232a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .project-description {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-link {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            /* 🎨 BORDA AZUL REACT: */
+            border: 1px solid #61dbfb;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Contato */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            /* 🎨 COR DO HOVER DO CONTATO - Azul água React: */
+            color: #61dafb;
+            transform: translateY(-3px);
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animações de scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#home" class="logo">Seu Nome</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Desenvolvedora Backend</h1>
+            <p>Criando soluções inovadoras com Java, Python e MySQL</p>
+            <a href="#projetos" class="cta-button">Ver Projetos</a>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Sobre Mim</h2>
+            <div class="about-content fade-in">
+                <div class="about-image">👩‍💻</div>
+                <div class="about-text">
+                    <p>Olá! Sou uma desenvolvedora backend apaixonada por tecnologia e sempre em busca de novos desafios. Atualmente estou me especializando em Java, Python e MySQL, construindo uma base sólida para criar aplicações robustas e eficientes.</p>
+                    <p>Minha jornada na programação começou com curiosidade e se transformou em paixão. Estou constantemente aprendendo e me atualizando com as melhores práticas do mercado, sempre focada em escrever código limpo e escalável.</p>
+                    <p>Além do desenvolvimento, estou aprimorando meu inglês para me comunicar melhor com a comunidade global de desenvolvedores e acessar as melhores fontes de conhecimento.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Tecnologias</h2>
+            <div class="skills-grid">
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">⚡</div>
+                    <h3>Java</h3>
+                    <p>Desenvolvimento de aplicações robustas e escaláveis com Spring Boot</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">🔥</div>
+                    <h3>Python</h3>
+                    <p>Scripts automatizados, APIs REST e análise de dados</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">💾</div>
+                    <h3>MySQL</h3>
+                    <p>Design de banco de dados, queries otimizadas e modelagem</p>
+                </div>
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">🌍</div>
+                    <h3>Inglês</h3>
+                    <p>Comunicação técnica e acesso à documentação internacional</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projetos -->
+    <section id="projetos" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Projetos</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-image">🛒</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Sistema de E-commerce</h3>
+                        <p class="project-description">API completa para e-commerce com autenticação, carrinho de compras e processamento de pedidos.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">REST API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">🌐 Demo</a>
+                            <a href="#" class="project-link">💻 GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">📈</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Dashboard de Vendas</h3>
+                        <p class="project-description">Sistema de análise de vendas com relatórios dinâmicos e visualização de dados em tempo real.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Chart.js</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">🌐 Demo</a>
+                            <a href="#" class="project-link">💻 GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">📖</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Sistema de Biblioteca</h3>
+                        <p class="project-description">Gerenciamento completo de biblioteca com controle de empréstimos, multas e reservas.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">JPA</span>
+                            <span class="tech-tag">Hibernate</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">🌐 Demo</a>
+                            <a href="#" class="project-link">💻 GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-image">⚙️</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Bot de Automação</h3>
+                        <p class="project-description">Bot inteligente para automatizar tarefas repetitivas e integração com APIs externas.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">APIs</span>
+                            <span class="tech-tag">Selenium</span>
+                            <span class="tech-tag">Scheduling</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">🌐 Demo</a>
+                            <a href="#" class="project-link">💻 GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Contato</h2>
+            <div class="contact-content fade-in">
+                <p>Estou sempre aberta para novas oportunidades e colaborações! Vamos conversar sobre tecnologia e projetos incríveis.</p>
+                <div class="contact-info">
+                    <a href="mailto:seu.email@exemplo.com" class="contact-item">
+                        ✉️ seu.email@exemplo.com
+                    </a>
+                    <a href="https://github.com/seuusuario" class="contact-item" target="_blank">
+                        💻 GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/seuusuario" class="contact-item" target="_blank">
+                        🤝 LinkedIn
+                    </a>
+                    <a href="https://wa.me/5511999999999" class="contact-item" target="_blank">
+                        💬 WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling para links de navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Animação de scroll para elementos
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observar todos os elementos com classe fade-in
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Efeito de transparência no header ao fazer scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.4)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.2)';
+            }
+        });
+
+        // Efeito de digitação no título principal (opcional)
+        const heroTitle = document.querySelector('.hero h1');
+        const text = heroTitle.textContent;
+        heroTitle.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                heroTitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        };
+        
+        setTimeout(typeWriter, 1000);
+    </script>
+</body>
+</html>
